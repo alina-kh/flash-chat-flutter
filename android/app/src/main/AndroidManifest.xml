@@ -25,9 +25,9 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Чат" >
+        android:label="flash_chat" >
         <activity
-            android:name="co.appbrewery.flash-chat.MainActivity"
+            android:name="co.appbrewery.flash_chat.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density"
             android:hardwareAccelerated="true"
             android:launchMode="singleTop"

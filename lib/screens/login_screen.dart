@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/rounded_button.dart';
 import 'package:flash_chat/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginScreen extends StatefulWidget {
   static const String id = 'login_screen';
@@ -10,6 +11,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  late String email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,8 +35,10 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 48.0,
             ),
             TextField(
+              keyboardType: TextInputType.emailAddress,
+              textAlign: TextAlign.center,
               onChanged: (value) {
-                //Do something with the user input.
+                email = value;
               },
               decoration: kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
             ),
@@ -40,8 +46,10 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 8.0,
             ),
             TextField(
+              obscureText: true,
+              textAlign: TextAlign.center,
               onChanged: (value) {
-                //Do something with the user input.
+                password = value;
               },
               decoration: kTextFieldDecoration.copyWith(hintText: 'Enter your password.'),
             ),
@@ -51,7 +59,17 @@ class _LoginScreenState extends State<LoginScreen> {
             RoundedButton(
               Colors.lightBlueAccent,
               'Войти',
-              func: () {},
+              func: () {
+                FirebaseAuth.instance
+                    .authStateChanges()
+                    .listen((User? user) {
+                  if (user == null) {
+                    print('User is currently signed out!');
+                  } else {
+                    print('User is signed in!');
+                  }
+                });
+              },
             ),
           ],
         ),

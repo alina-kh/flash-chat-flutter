@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flash_chat/screens/login_screen.dart';
 import 'package:flash_chat/screens/registration_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +21,10 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     super.initState();
 
     controller = AnimationController(
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 1),
       vsync: this,
     );
-    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
+    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white24)
         .animate(controller);
     controller.forward();
     controller.addListener(() {
@@ -59,14 +57,17 @@ class _WelcomeScreenState extends State<WelcomeScreen>
                     height: 60.0,
                   ),
                 ),
-                TypewriterAnimatedTextKit(
-                  textStyle: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.yellow,
-                  ),
-                  text: [
-                    'Flash Чат',
+                AnimatedTextKit(
+                  isRepeatingAnimation: true,
+                  animatedTexts: [
+                    TyperAnimatedText(
+                      'Чат',
+                      textStyle: TextStyle(
+                        fontSize: 45.0,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.yellow,
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -74,18 +75,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             SizedBox(
               height: 48.0,
             ),
-            RoundedButton(
-                Colors.lightBlueAccent,
-                'Войти',
-                func: () {
-                  Navigator.of(context).pushNamed(LoginScreen.id);
-                }),
-            RoundedButton(
-                Colors.blueAccent,
-                'Зарегистироваться',
-                func: () {
-                  Navigator.of(context).pushNamed(RegistrationScreen.id);
-                }),
+            RoundedButton(Colors.lightBlueAccent, 'Войти', func: () {
+              Navigator.of(context).pushNamed(LoginScreen.id);
+            }),
+            RoundedButton(Colors.blueAccent, 'Регистрация', func: () {
+              Navigator.of(context).pushNamed(RegistrationScreen.id);
+            }),
           ],
         ),
       ),
